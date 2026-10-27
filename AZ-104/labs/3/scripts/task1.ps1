@@ -21,3 +21,34 @@ New-AzDisk `
     -ResourceGroupName $resourceGroup `
     -DiskName $diskName `
     -Disk $diskConfig
+
+# Export disk as an ARM template
+$armPath = "$psScriptRoot\..\az104-disk1-script-template.json"
+
+$disk = Get-AzDisk -ResourceGroupName $resourceGroup -DiskName $diskName
+
+Export-AzResourceGroup `
+    -ResourceGroupName $resourceGroup `
+    -Resource $disk.Id `
+    -Path $armPath `
+    -Force
+
+<#export the disk as a Bicep template --NOT WORKING YET, EXPORTS EMPTY FILES
+$bicepPath = "$psScriptRoot\..\az104-disk1-script-template.bicep"
+
+Export-AzResourceGroup `
+    -ResourceGroupName $resourceGroup `
+    -Resource $disk.Id `
+    -OutputFormat Bicep `
+    -Path $bicepPath `
+    -Force
+#>
+
+#Convert the ARM template to a Bicep template
+
+if (-not (Get-Command "bicep" -ErrorAction SilentlyContinue)) {
+    Write-Host "Bicep CLI is not installed. Please install it from https://aka.ms/bicep/install"
+    exit
+}
+
+bicep decompile "$armPath" --outfile "$psScriptRoot\..\az104-disk1-script-template.bicep"
