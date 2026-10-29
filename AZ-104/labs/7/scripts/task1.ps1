@@ -4,12 +4,25 @@ $subscription = Get-AzSubscription | Out-GridView -Title "Select a subscription"
 Set-AzContext -SubscriptionId $subscription.Id
 
 # Target resources and allowed public IP.
-$resourceGroup = "az104-lab6-rg"
-$accountName = "az104lab6storageaccount"
+$resourceGroup = "az104-lab7-rg"
+$accountName = "az104lab7storageaccount"
 $allowedIP = "212.25.21.70"
 
 # Create a GRS general-purpose v2 storage account.
-New-AzStorageAccount -ResourceGroupName $resourceGroup -Name $accountName -Location "switzerlandnorth" -SkuName Standard_GRS -Kind StorageV2 -PublicNetworkAccess Enabled
+while ($true) {
+    try {
+        New-AzStorageAccount -ResourceGroupName $resourceGroup -Name $accountName -Location "switzerlandnorth" -SkuName Standard_GRS -Kind StorageV2 -PublicNetworkAccess Enabled -ErrorAction Stop
+        break
+    } catch {
+        $availability = Get-AzStorageAccountNameAvailability -Name $accountName -ErrorAction Stop
+        if ($availability.NameAvailable) {
+            throw
+        }
+
+        Write-Warning $availability.Message
+        $accountName = Read-Host "Enter another storage account name"
+    }
+}
 
 # Deny network access by default; allow the specified IP.
 Update-AzStorageAccountNetworkRuleSet -ResourceGroupName $resourceGroup -Name $accountName -DefaultAction Deny -IpRule (@{IPAddressOrRange=$allowedIP;Action="allow"})

@@ -1,4 +1,4 @@
-# Lab 00 - Template
+# Lab 07 - Template
 ## Intro
 In this lab you learn to create storage accounts for Azure blobs and Azure files. You learn to configure and secure blob containers. You also learn to use Storage Browser to configure and secure Azure file shares.
 ## Scenario
@@ -10,7 +10,6 @@ Your organization is currently storing data in on-premises data stores. Most of 
 
 ## Write up
 ### Task 1: Create and configure a storage account
-#### GUI
 - Create a new storage account in the storage account service with the following parameters:
 
 | Setting | Value |
@@ -29,4 +28,22 @@ Your organization is currently storing data in on-premises data stores. Most of 
     - Data Management Blade --> Lifecycle Management --> Add a rule
     - *If base blobs were last modified more than 30 days ago then Move to cool storage*
 
-### Task 2: 
+### Task 2: Create and configure secure blob storage
+#### Create a blob container and a time-based retention policy
+- Created a container in the storage account (Data Storage Blade --> Container --> Create)
+- Created a time-based retention policy (180 days)
+    - From the container list:
+    - ... --> Access Policy --> Immutable blob storage --> Add Policy
+    - Type: Time-based
+    - Set 180 days
+    - Save
+#### Manage Blob uploads
+- In the storage account's left menu, under Settings, select Configuration and set Allow storage account key access to Enabled, then click Save.
+- From the Access Control (IAM) blade at the storage account level, added the following roles to my user:
+    - Storage Blob Data Contributor
+        - _Allows for read, write and delete access to Azure Storage blob containers and data_
+    - Storage File Data Privileged Contributor 
+        - _Customer has read, write, delete and modify NTFS permission access on Azure Storage file shares_
+- Uploaded a test file to the container, from the storage browser blade
+- Copied the file link and tried to access it from a private browser page --> Forbidden (OK)
+

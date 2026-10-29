@@ -1,0 +1,39 @@
+
+ResourceGroupName  : az104-lab7-rg
+StorageAccountName : az104storageaccountlab7
+Id                 : /subscriptions/8cde7d26-523f-4170-8ddf-8ffc699e2d60/resourceGroups/az104-lab7-rg/providers/Microsoft.Storage/storageAccounts/az104storageaccountlab7/managementPolicies/default
+Type               : Microsoft.Storage/storageAccounts/managementPolicies
+LastModifiedTime   : 29.10.2026 12:38:08
+Rules              : [
+                       {
+                         "Enabled": true,
+                         "Name": "MoveToCool",
+                         "Definition": {
+                           "Actions": {
+                             "BaseBlob": {
+                               "TierToCool": {
+                                 "DaysAfterModificationGreaterThan": 30,
+                                 "DaysAfterLastAccessTimeGreaterThan": null,
+                                 "DaysAfterCreationGreaterThan": null,
+                                 "DaysAfterLastTierChangeGreaterThan": null
+                               },
+                               "TierToArchive": null,
+                               "Delete": null,
+                               "TierToCold": null,
+                               "TierToHot": null,
+                               "EnableAutoTierToHotFromCool": null
+                             },
+                             "Snapshot": null,
+                             "Version": null
+                           },
+                           "Filters": {
+                             "PrefixMatch": null,
+                             "BlobTypes": [
+                               "blockBlob"
+                             ],
+                             "BlobIndexMatch": null
+                           }
+                         }
+                       }
+                     ]
+
