@@ -62,3 +62,20 @@ AZ check toutes les règles une par une, en partant du chiffre le plus petit, et
 Si on a un NSG sur le NIC ainsi que le subnet, les 2 doivent approuver le traffic. Si un bloque, c'est mort.
 Traffic IN: Subnet NSG --> NIC NSG
 Traffic OUT: NIC NSG --> Subnet NSG
+
+### VM
+
+Une fois que le réseau a été plannifié, il faut préparer la VM selon les besoins
+
+Il faut faire attention au non de la VM, car il n'est pas simple de le changer après cout.
+Celui ci devient aussi hostname dans l'OS de la VM
+Il faut une bonne convention de nommage:
+
+- Env (Dev/prod/qa)
+- Location (dans un environnement où on aurait plusieur régions)
+- Instance (webapp01, 02,...)
+- produit/service/projet
+- role
+
+exemple MS: deveus-webvm01
+
