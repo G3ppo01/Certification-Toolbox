@@ -1,12 +1,12 @@
 # Learning Notes
 
-## Introduction to virtual machines
+## Introduction aux machines virtuelles
 
 https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines
 
-Az ressource --> objet gérable dans az, comme une VM, disque, réseau (vnet),...
+Une ressource Azure est un objet que l'on peut gérer dans Azure, par exemple une VM, un disque ou un réseau (VNet).
 
-une VM a besoin de:
+Une VM a besoin des éléments suivants :
 
 - VM
 - Disque
@@ -14,33 +14,33 @@ une VM a besoin de:
 - IP
 - Network Security Group (NSG)
 
-Az peut créer ces ressources lui même, ou l'on peut en assigner d'existantes
-Les VM sont "IaaS"
+Azure peut créer ces ressources lui-même ou utiliser des ressources existantes.
+Les VM sont des ressources IaaS.
 
-Les VM ont des paramètres commes le nom, la taille (CPU, RAM, GPU, ..), et l'OS
-Choisir la taille selon le besoin
+Les VM ont des paramètres comme le nom, la taille (CPU, RAM, GPU, etc.) et le système d'exploitation.
+Il faut choisir la taille selon les besoins.
 
-Les VMs ont 2 disques par défaut, un pour l'OS, et un temporaire (données effacé si machine éteinte).
-Possible d'en ajouter d'autres (persistant).
+Les VM ont deux disques par défaut : un disque pour le système d'exploitation et un disque temporaire dont les données sont effacées lorsque la machine est arrêtée.
+Il est possible d'ajouter d'autres disques persistants.
 
-La VM a un VNIC (Virtual Network Interface) avec possibilitée d'un IP privé et/ou publique (dans un VNet).
-De cette manière, la VM peut parler avec d'autres ressources AZ, ainsi qu'internet, ou un DC on-prem.
+La VM possède une NIC (Network Interface Card) virtuelle avec une adresse IP privée et/ou publique dans un VNet.
+Ainsi, la VM peut communiquer avec d'autres ressources Azure, avec Internet ou avec un contrôleur de domaine local (on-premises).
 
-Toutes les ressources  lié à une app/projetsont dans un ressource group.
+Toutes les ressources liées à une application ou à un projet sont regroupées dans un resource group.
 
-### VM checklist
+### Liste de vérification pour la VM
 
-#### Network
+#### Réseau
 
-Virtual networks (VNets) est le réseau virtuel dans le quel la VM et d'autres ressources communiques.
-C'est le même principe qu'un réseau normal.
-De base, les ressources en communiques qu'avec d'autres ressource dans le même réseau, mais il est possible de modifier cela.
+Les réseaux virtuels (VNet) constituent le réseau dans lequel la VM et les autres ressources communiquent.
+Ils fonctionnent selon le même principe qu'un réseau traditionnel.
+Par défaut, les ressources ne communiquent qu'avec les autres ressources du même réseau, mais il est possible de modifier ce comportement.
 
-Lors de la création, il faut choisir une plage IP, qui possiblement ne piétine la plage que l'on utilise pour un autre VNet (ou On-Prem).
-Ensuite, possible de créer des subnet dans un Vnet, et de sécuriser le traffic via Network security Groups (NSG)
-Un NSG permet de mettre des règles de communication entres subnets, ASG (Application Security Groups), IP/Ports, ..., comme un FW un peu
-Par exemple:
-Ecco come dialogano insieme i componenti che hai elencato:
+Lors de la création, il faut choisir une plage IP qui ne chevauche pas celle utilisée par un autre VNet ou par un réseau on-premises.
+Il est ensuite possible de créer des sous-réseaux dans un VNet et de sécuriser le trafic à l'aide de Network Security Groups (NSG).
+Un NSG permet de définir des règles de communication entre sous-réseaux, ASG (Application Security Groups), adresses IP et ports. Il joue un rôle similaire à celui d'un pare-feu.
+
+Par exemple :
 
 1. **1 VNet**: Fa da perimetro di rete generale per la tua applicazione (es. `10.0.0.0/16`).
 2. **Subnet dedicate**: Separi la rete in livelli logici (es. `FrontendSubnet` per il Web e `BackendSubnet` per il Database).
@@ -55,59 +55,61 @@ Ecco come dialogano insieme i componenti che hai elencato:
     - **Regola 2 (Web verso DB)**: Sorgente: `ASG-Web` ➔ Destinazione: `ASG-SQL` (Porta 1433 SQL) ➔ **Allow**.
     - **Regola 3 (Isolamento DB)**: Sorgente: `ServiceTag: Internet` ➔ Destinazione: `ASG-SQL` ➔ **Deny** (anche se la regola di default di Azure bloccherebbe già l'ingresso da Internet).
 
-Ordre d'application des règles:
-Les règles ont une priorité de 100 à 4096. La priorité la bplus basse l'emporte.
-AZ check toutes les règles une par une, en partant du chiffre le plus petit, et arrète le check dès le premier match.
+Ordre d'application des règles :
+Les règles ont une priorité comprise entre 100 et 4096. La priorité la plus basse est appliquée en premier.
+Azure vérifie toutes les règles une par une, en commençant par la valeur la plus petite, et s'arrête dès la première correspondance.
 
-Si on a un NSG sur le NIC ainsi que le subnet, les 2 doivent approuver le traffic. Si un bloque, c'est mort.
-Traffic IN: Subnet NSG --> NIC NSG
-Traffic OUT: NIC NSG --> Subnet NSG
+Si un NSG est associé à la fois à la NIC et au sous-réseau, les deux doivent autoriser le trafic. Si l'un d'eux le bloque, le trafic est refusé.
+Trafic entrant : sous-réseau NSG --> NIC NSG
+Trafic sortant : NIC NSG --> sous-réseau NSG
 
 ### VM
 
-Une fois que le réseau a été plannifié, il faut préparer la VM selon les besoins
+Une fois que le réseau a été planifié, il faut préparer la VM selon les besoins.
 
-Il faut faire attention au non de la VM, car il n'est pas simple de le changer après cout.
-Celui ci devient aussi hostname dans l'OS de la VM
-Il faut une bonne convention de nommage:
+Il faut faire attention au nom de la VM, car il n'est pas simple de le modifier après sa création.
+Ce nom devient également le nom d'hôte dans le système d'exploitation de la VM.
+Il faut définir une convention de nommage cohérente :
 
-- Env (Dev/prod/qa)
-- Location (dans un environnement où on aurait plusieur régions)
-- Instance (webapp01, 02,...)
-- produit/service/projet
-- role
+- environnement (Dev, Prod, QA) ;
+- emplacement (dans un environnement comportant plusieurs régions) ;
+- instance (webapp01, webapp02, etc.) ;
+- produit, service ou projet ;
+- rôle.
 
-exemple MS: deveus-webvm01
+Exemple Microsoft : deveus-webvm01
 
 #### Location
 
-Choisir l'emplacement le plus proche des utilisateurs possible.
-cela permet d'améliorer les perf et d'etre compliant avec les réglementations locales
+Choisir l'emplacement le plus proche possible des utilisateurs.
+Cela permet d'améliorer les performances et de respecter les réglementations locales.
 
-Certaines features ne sont pas dispo partout
-Il peut aussi y avoir des differences au niveau de prix
-Si il n'y a pas de restrictions réglementaires ou de perf, ça peut valoir la peine de comparer les prix
+Certaines fonctionnalités ne sont pas disponibles partout.
+Il peut aussi y avoir des différences de prix.
+S'il n'y a aucune restriction réglementaire ou liée aux performances, il peut être utile de comparer les prix.
 
 #### Taille de la VM
 
-Plutot que de devoir tout configurer à la main, AZ propose des tailles adaptées aux differents Workloads
+Plutôt que de devoir tout configurer manuellement, Azure propose des tailles adaptées aux différents workloads.
 
 - General Purpose
 - Compute Optimized (CPU)
 - Memory Optimized (RAM)
 - Storage Optimized (Storage et I/O)
-- GPU (Graphic and AI workload)
-- High Performance Compute (CPU ++ et High throughput network interface)
+- GPU (workloads graphiques et d'intelligence artificielle)
+- High Performance Compute (CPU renforcé et interface réseau à haut débit)
 
-Il est possible de changer la taille d'une VM
-Le chamgement reboot la machine
+Il est possible de changer la taille d'une VM.
+La modification redémarre la machine.
 
-La taille détermine aussi le nombre de NiC utilisables pour une VM
+La taille détermine aussi le nombre de NIC utilisables pour une VM.
 
-### Pricing
+### Tarification
 
-Les VMs sont facturés, mais les composants qui y sont attachés aussi
-Composants facturés:
+Les VM sont facturées, tout comme les composants qui y sont associés.
+Composants facturés :
 
 - VNet
 - IP (privée et publique)
+- Disques du système d'exploitation et disques supplémentaires
+- Licence du système d'exploitation (si applicable)
