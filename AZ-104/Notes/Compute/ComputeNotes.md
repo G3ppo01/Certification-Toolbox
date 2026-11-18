@@ -107,7 +107,7 @@ La taille détermine aussi le nombre de NiC utilisables pour une VM
 ### Pricing
 
 Les VMs sont facturés, mais les composants qui y sont attachés aussi
-Composants facturés: 
+Composants facturés:
 
 - VNet
 - IP (privée et publique)
