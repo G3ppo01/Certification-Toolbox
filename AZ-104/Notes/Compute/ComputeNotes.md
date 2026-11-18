@@ -38,3 +38,27 @@ De base, les ressources en communiques qu'avec d'autres ressource dans le même 
 
 Lors de la création, il faut choisir une plage IP, qui possiblement ne piétine la plage que l'on utilise pour un autre VNet (ou On-Prem).
 Ensuite, possible de créer des subnet dans un Vnet, et de sécuriser le traffic via Network security Groups (NSG)
+Un NSG permet de mettre des règles de communication entres subnets, ASG (Application Security Groups), IP/Ports, ..., comme un FW un peu
+Par exemple:
+Ecco come dialogano insieme i componenti che hai elencato:
+
+1. **1 VNet**: Fa da perimetro di rete generale per la tua applicazione (es. `10.0.0.0/16`).
+2. **Subnet dedicate**: Separi la rete in livelli logici (es. `FrontendSubnet` per il Web e `BackendSubnet` per il Database).
+3. **ASG per Ruolo**: Assegni le schede di rete (NIC) delle VM ai relativi gruppi logici:
+
+    - `ASG-Web` alle VM frontend.
+    - `ASG-SQL` alle VM del database.
+
+4. **NSG centralizzato a livello di Subnet**: Associ l'NSG alla Subnet e scrivi regole pulite basate sugli ASG:
+
+    - **Regola 1 (Ingresso Web)**: Sorgente: `ServiceTag: Internet` ➔ Destinazione: `ASG-Web` (Porta 443 HTTPS) ➔ **Allow**.
+    - **Regola 2 (Web verso DB)**: Sorgente: `ASG-Web` ➔ Destinazione: `ASG-SQL` (Porta 1433 SQL) ➔ **Allow**.
+    - **Regola 3 (Isolamento DB)**: Sorgente: `ServiceTag: Internet` ➔ Destinazione: `ASG-SQL` ➔ **Deny** (anche se la regola di default di Azure bloccherebbe già l'ingresso da Internet).
+
+Ordre d'application des règles:
+Les règles ont une priorité de 100 à 4096. La priorité la bplus basse l'emporte.
+AZ check toutes les règles une par une, en partant du chiffre le plus petit, et arrète le check dès le premier match.
+
+Si on a un NSG sur le NIC ainsi que le subnet, les 2 doivent approuver le traffic. Si un bloque, c'est mort.
+Traffic IN: Subnet NSG --> NIC NSG
+Traffic OUT: NIC NSG --> Subnet NSG
