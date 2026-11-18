@@ -79,3 +79,35 @@ Il faut une bonne convention de nommage:
 
 exemple MS: deveus-webvm01
 
+#### Location
+
+Choisir l'emplacement le plus proche des utilisateurs possible.
+cela permet d'améliorer les perf et d'etre compliant avec les réglementations locales
+
+Certaines features ne sont pas dispo partout
+Il peut aussi y avoir des differences au niveau de prix
+Si il n'y a pas de restrictions réglementaires ou de perf, ça peut valoir la peine de comparer les prix
+
+#### Taille de la VM
+
+Plutot que de devoir tout configurer à la main, AZ propose des tailles adaptées aux differents Workloads
+
+- General Purpose
+- Compute Optimized (CPU)
+- Memory Optimized (RAM)
+- Storage Optimized (Storage et I/O)
+- GPU (Graphic and AI workload)
+- High Performance Compute (CPU ++ et High throughput network interface)
+
+Il est possible de changer la taille d'une VM
+Le chamgement reboot la machine
+
+La taille détermine aussi le nombre de NiC utilisables pour une VM
+
+### Pricing
+
+Les VMs sont facturés, mais les composants qui y sont attachés aussi
+Composants facturés: 
+
+- VNet
+- IP (privée et publique)
