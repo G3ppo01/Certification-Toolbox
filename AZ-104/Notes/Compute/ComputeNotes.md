@@ -113,3 +113,6 @@ Composants facturés :
 - IP (privée et publique)
 - Disques du système d'exploitation et disques supplémentaires
 - Licence du système d'exploitation (si applicable)
+
+
+testtest
