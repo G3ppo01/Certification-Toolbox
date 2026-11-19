@@ -114,5 +114,50 @@ Composants facturés :
 - Disques du système d'exploitation et disques supplémentaires
 - Licence du système d'exploitation (si applicable)
 
+Pour les VMs, le calcul et le stockage sont facturé séparément. Ce qui permet d'optimiser au mieux les coûts de ces ressources
 
-testtest
+La tarification du calcul est indiquée sur une base horaire, mais facturée à la minute.
+Si une VM est utilisée 43 minutes, et désallouée ensuite, uniquement 43 minutes seront facturées.
+Désallouer une VM libère le hardware sur laquelle elle tourne dans le DC Microsoft.
+Le prix est basé sur la taille et l'OS. En cas de besoin d'une licence pour l'OS, le prix de celle-ci est incluse dans le prix de la VM.
+Il est possible de récupérer et utiliser des licences on-premises existantes, pour les utiliser dans le cloud. Ce qui peut permettre de gagner quelques sous.
+
+2 types de payements pour les VMs:
+
+- Pay-as-you-go
+  - Paye l'utilisation (à la seconde).
+  - Pas de payements "upfront".
+- Reserved Virtual Machine Instances
+  - Reserver une VM pour une durée de 1 à plusieurs années.
+  - Peut coûter 72% moins cher que le Pay as you go pour une utilisation équivalente.
+  - Les coûts sont prévisibles et plus facilement budgétisables.
+
+Le stockage n'est pas inclus dans le pricing des VMs.
+Si une VM est éteinte, mais qu'un disque existe et contient des données, il faudra tout de même payer le storage.
+
+### Stockage
+
+Une VM a deux disques par défaut : le disque du système d'exploitation et un disque éphémère.
+Il est conseillé de créer un disque distinct pour conserver les données persistantes.
+
+#### Types de disques Azure
+
+| | Ultra Disk | Premium SSD v2 | Premium SSD | Standard SSD | Standard HDD |
+| --- | --- | --- | --- | --- | --- |
+| **Type de disque** | SSD | SSD | SSD | SSD | HDD |
+| **Scénario** | Charge de travail intensive en entrées/sorties, comme SAP HANA, les bases de données critiques (SQL, Oracle, etc.) et les autres charges de travail transactionnelles lourdes. | Charge de production et de performances sensibles à la latence, nécessitant une faible latence ainsi qu'un débit et un nombre d'IOPS élevés. | Charge de production et de performances sensibles à la latence. | Serveurs web peu utilisés, applications d'entreprise et environnements de développement/test. | Sauvegarde, accès occasionnel non critique et peu fréquent. |
+| **Taille maximale du disque** | 65 536 GiB | 65 536 GiB | 32 767 GiB | 32 767 GiB | 32 767 GiB |
+| **Débit maximal** | 4 000 Mo/s | 1 200 Mo/s | 900 Mo/s | 750 Mo/s | 500 Mo/s |
+| **IOPS maximal** | 160 000 | 80 000 | 20 000 | 6 000 | 2 000 |
+| **Peut être utilisé comme disque du système d'exploitation** | Non | Non | Oui | Oui | Oui |
+
+### Système d'exploitation
+
+Prix de la VM peut varier selon l'OS, car les licences et besoin matériels ne sont pas les mêmes par tout.
+
+Pour certain services, il existes des image à installer qui ont déjà uns stack prêtes dans le marketplace.
+Par exemple, pour un site web, on pourrait avoir une image avec apache, MySQL et PHP/NodeJS déjà installés.
+
+Il est aussi possible de créer des images à installer selon nos besoins, et utiliser "Azure Compute Gallery" pour gérer des images custom.
+
+Azure Compute Gallery est un service qui permet de gérer, versionner et distribuer des images OS entre plusieurs régions et abonnements Azure
