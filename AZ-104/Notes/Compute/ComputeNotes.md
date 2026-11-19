@@ -38,6 +38,7 @@ Par défaut, les ressources ne communiquent qu'avec les autres ressources du mê
 
 Lors de la création, il faut choisir une plage IP qui ne chevauche pas celle utilisée par un autre VNet ou par un réseau on-premises.
 Il est ensuite possible de créer des sous-réseaux dans un VNet et de sécuriser le trafic à l'aide de Network Security Groups (NSG).
+Dans chaque subnet, les premier 4 IPs et le dernier IP sont réservé pour la gestion du subnet.
 Un NSG permet de définir des règles de communication entre sous-réseaux, ASG (Application Security Groups), adresses IP et ports. Il joue un rôle similaire à celui d'un pare-feu.
 
 Par exemple :
