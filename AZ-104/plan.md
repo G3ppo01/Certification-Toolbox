@@ -1,63 +1,668 @@
-# AZ-104: 14-day study sprint — calendar brief for Gemini
+# AZ-104 — Revised Study Plan
 
-## Dates and goals
-- Time zone: **Europe/Zurich**. Fixed sprint: **17–30 November 2026**, inclusive.
-- These explicit dates override the earlier phrase “starting tomorrow”: 17 November is today in the current context. Do not shift the sprint automatically; flag any elapsed sessions for replanning.
-- Target: exam attempt #1 on **27 November**; practice assessment **25 November**; remediation **26 November**; conditional retake buffer **28–30 November**.
-- Baseline: **52% overall**, taken before finishing the material. Approximate domain scores: Compute 30–35%, Monitor/Maintain 25%, Networking 55%, Identity/Governance 65–70%, Storage 75%.
-- Priorities: Compute → Monitor/Backup → Networking → Identity/Governance → Storage. Cover every domain, with extra time for the first two.
-- Readiness target: ≥80% on fresh mixed practice questions, no domain below 70%, and ability to explain choices without notes. This is a study target, not a guaranteed pass or an exam-score conversion.
-- Core preparation: **25 hours through 26 November**; exam and conditional buffer time are additional.
+## Context
 
-## Session method and definition of done
-For each 135-minute topic session: 55 min official learning → 40 min application → 30 min scenario questions → 10 min error log. Split across train journeys and a desk session if needed.
+- Current date: **19 November 2026**
+- Goal: be ready to attempt **AZ-104 by the end of November 2026**, if readiness is sufficient.
+- Exam is **not booked yet**.
+- If the next practice assessment shows that readiness is still too low, postpone the exam instead of forcing an attempt.
+- Initial baseline practice assessment: **52% overall**.
+- Approximate initial strengths/weaknesses:
+  - Storage: ~75%
+  - Identity & Governance: ~65–70%
+  - Networking: ~55%
+  - Compute: ~30–35%
+  - Monitor / Maintain: ~25%
+- Current progress:
+  - Compute study has started.
+  - Completed the introductory Azure VM checklist unit.
+  - Notes have been too detailed and are slowing down progress.
+- New strategy:
+  - prioritize **coverage + active recall + targeted labs**
+  - reduce note-taking
+  - use labs only where hands-on work adds real value
+  - use practice results to decide whether to book the exam
 
-Application means a hands-on lab when available, otherwise a documented configuration walkthrough. Answer at least 15 topic questions per normal session; explain wrong answers and why alternatives fail. Record gaps in `AZ104-GAPS.md`: topic, mistake, correct rule, official reference, next review date. Aim for ≥80%; carry unresolved gaps into the next review.
+---
 
-## Daily calendar events
-| Date | Event title | Duration | Topics / activity | Definition of done |
-|---|---|---:|---|---|
-| Tue 17 Nov | AZ-104 — Compute I: VMs and disks | 135 min | VM creation, sizing, OS/data/temp disks, managed disk types, encryption, resizing and moving VMs | Explain VM components and disk choices; configure or walk through one VM and disk change; complete topic questions. |
-| Wed 18 Nov | AZ-104 — Compute II: Availability and IaC | 135 min | Availability Sets vs Zones, VM Scale Sets, scaling; ARM/Bicep resources, parameters, dependencies, deployment scopes | Choose availability options from scenarios; interpret and modify a small template; complete topic questions. |
-| Thu 19 Nov | AZ-104 — Compute III: Apps and containers | 135 min | App Service plans, scale up/out, deployment slots, TLS/custom domains, backup; ACR, ACI and Container Apps | Select the right hosting service; explain slot swaps and scaling; deploy or trace one app/container; complete topic questions. |
-| Fri 20 Nov | AZ-104 — Monitor, logs and alerts | 135 min | Azure Monitor metrics vs logs, diagnostic settings, Log Analytics, basic KQL, alerts, action groups, Insights | Trace a resource signal to an alert/action; interpret a simple query; complete topic questions. |
-| Sat 21 Nov | AZ-104 — Backup, recovery and weak-domain check | 180 min | Backup policies, Recovery Services/Backup vault choices, restore, Site Recovery and failover; Network Watcher basics | 60 min learn + 45 min restore/failover walkthrough + 45 min fresh Compute/Monitor quiz (≥30 questions) + 30 min review. Log domain results and top three gaps; target ≥75%. |
-| Sun 22 Nov | AZ-104 — Networking I: Connectivity and security | 135 min | VNets/subnets, IP addressing, peering, NSG/ASG rules, effective rules, UDRs, service/private endpoints | Trace a packet path and diagnose a blocked connection; explain endpoint choices; complete topic questions. |
-| Mon 23 Nov | AZ-104 — Networking II: DNS and load balancing | 135 min | Public/private DNS, Azure Load Balancer, health probes, backend pools, connectivity troubleshooting | Resolve a DNS and a load-balancing scenario; check remaining networking objectives in the study guide; complete topic questions. |
-| Tue 24 Nov | AZ-104 — Identity, governance and storage refresh | 180 min | 75 min Entra users/groups, guests, licensing, SSPR, RBAC scopes vs directory roles, Policy, locks, tags, management groups, budgets; 45 min storage redundancy, tiers/lifecycle, SAS/keys/RBAC, firewalls, Files/Blob recovery, AzCopy; 45 min mixed questions + 15 min log | Explain role/scope and Policy/lock differences; choose storage access/redundancy options; ≥25 mixed questions with reviewed answers. |
-| Wed 25 Nov | AZ-104 — Practice assessment and diagnosis | 180 min | 90 min uninterrupted, closed-notes official practice assessment (or its stated duration); 60 min answer review; 30 min remediation plan | Save overall/domain results; rank gaps by frequency and exam impact. Target ≥80% overall and ≥70% per domain where reported; otherwise derive domain gaps from missed items. |
-| Thu 26 Nov | AZ-104 — Remediation and readiness check | 150 min | 75 min top three gaps from 25 Nov; 45 min fresh mixed questions; 30 min review and exam logistics | Re-explain corrected rules; meet readiness target on fresh questions; verify booking, ID, route or online exam setup. If below target, flag postponement decision to user before any booking change. |
-| Fri 27 Nov | AZ-104 — Exam attempt #1 | 30 min review + provisional 180 min exam block | Light recall only; exam block includes check-in and contingency, adjusted to booking confirmation | Attend confirmed exam; record outcome and domain feedback. Avoid heavy study immediately before exam. |
-| Sat 28 Nov | AZ-104 — Conditional remediation / retake buffer | 90 min, conditional | If unsuccessful: review score report and remediate weakest domains. If passed: release buffer. | Document corrected gaps; consider one retake only after the required waiting period and sufficient preparation. |
-| Sun 29 Nov | AZ-104 — Conditional readiness / retake buffer | 90 min, conditional | Fresh questions and targeted walkthroughs if still preparing; optional retake slot subject to availability | Recheck readiness; if retaking, replace study block with confirmed exam block plus check-in buffer. |
-| Mon 30 Nov | AZ-104 — Final conditional retake buffer | Provisional 180 min, conditional | One retake if eligible, ready and booked; otherwise use 60–90 min to plan further remediation | Record outcome or next study steps. No assumption that a retake slot is available. |
+# Main Priorities
 
-## Train, subscription and lab notes
-- Train-friendly: downloaded Learn material, notes, diagrams, template reading, flashcards and scenario questions. Download before travel; do not depend on train Wi-Fi.
-- Desk session: Azure Portal/CLI labs, deployment, network testing and restore walkthroughs. Mark these calendar blocks “desk + internet required.”
-- An Azure subscription is not assumed. If available, use a dedicated lab resource group, small resources and a budget alert; alerts do not cap spending. Remove lab resources after use and check for remaining billable disks, IPs and vault items.
-- Without a subscription, continue on schedule using official lab instructions, screenshots and configuration reasoning. Mark activities as walkthroughs, not completed deployments; revisit the highest-priority labs when access is available. Do not assume a free sandbox exists.
-- Prepare learning links, offline notes and the gap log before the first session; avoid letting setup consume the study block.
+Study priority based on exam weight + current weaknesses:
 
-## Instructions for Gemini scheduling
-1. Inspect calendar availability in Europe/Zurich. Use the exact dates, event titles, durations, topics and completion criteria above in event descriptions.
-2. Prefer existing train journeys for learning/questions; use available desk time for labs. Commute times are unknown: use calendar evidence or ask for them. Do not invent train times or move existing commitments.
-3. Split normal sessions into 45–75 minute blocks when useful, preserving total study time and learning → application → questions → log order. Add 5–10 minute breaks outside study durations. Keep the 25 Nov assessment uninterrupted.
-4. Keep 25 Nov assessment, 26 Nov remediation and 27 Nov exam target fixed. If time is insufficient, flag the conflict; prioritize Compute and Monitor/Backup while retaining coverage of all domains. Do not silently compress or omit work.
-5. Treat 27 Nov as a tentative exam hold until a real booking is confirmed. Calendar scheduling does not book or pay for the exam. Adjust the hold to the provider's confirmed appointment and check-in requirements.
-6. Reserve 28–30 Nov as tentative availability for **one conditional retake**, not three exam attempts. Microsoft requires at least 24 hours after the first failed attempt; after a second failed attempt, the next wait is 14 days. Confirm eligibility, price and slot availability before booking. Release unused holds after passing.
-7. Add a 15-minute reminder to study events. Use booking-specific exam reminders. Avoid overlapping events; if dates have elapsed, ask how to redistribute unfinished work without automatically shifting exam milestones.
+1. **Compute**
+2. **Monitor / Backup / Recovery**
+3. **Networking**
+4. **Identity & Governance**
+5. **Storage**
 
-## Official resources
-- [AZ-104 study guide and objective checklist](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104) — use the objectives applicable to the exam date/language; check off coverage by 24 Nov.
-- [AZ-104 certification, training and practice assessment](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/) — follow the current practice-assessment link; prefer the updated experience over the legacy assessment. Use fresh questions to limit memorization effects.
-- [Official AZ-104 lab instructions](https://microsoftlearning.github.io/AZ-104-MicrosoftAzureAdministrator/).
-- [Microsoft exam retake policy](https://learn.microsoft.com/en-us/credentials/support/retake-policy).
+Do not study all domains equally.
 
-## Stato attuale — aggiornato il 17/11/2026
-- Valutazione iniziale: 52% complessivo.
-- Sessioni completate: nessuna.
-- Argomento attuale: Compute I — VM e dischi.
-- Difficoltà riscontrate: da rilevare.
-- Ultimo quiz: non ancora svolto.
-- Prossimo passo: completare la prima sessione Compute.
+The goal is to turn strong areas into reliable points and rapidly raise weak areas to a safe level.
+
+---
+
+# Study Method
+
+For each study block:
+
+1. **Official Microsoft Learn / documentation**
+2. **Minimal notes**
+3. **Scenario questions / active recall**
+4. **Hands-on only if useful**
+5. **Log mistakes**
+
+Target structure for a normal session:
+
+- 50–70 min learning
+- 15–25 min concise notes
+- 25–40 min questions / recall
+- 10 min gap log
+- optional 20–40 min lab when worthwhile
+
+## Note-taking rule
+
+Do **not** rewrite Microsoft Learn.
+
+Only note:
+
+- Azure-specific behavior
+- differences between similar services
+- exam traps
+- values/rules worth remembering
+- things I got wrong
+- things I did not already know
+
+Example:
+
+Do not write:
+
+> A subnet is a subdivision of a network.
+
+Write:
+
+> Azure reserves the first 4 IPs and the last IP of every subnet.
+
+Target compression:
+
+> ~10 pages of Microsoft Learn → 1–2 pages of useful notes
+
+---
+
+# Readiness Criteria
+
+The next practice assessment is the main decision point.
+
+## Green light
+
+Book / sit the exam if:
+
+- overall score is **80%+**
+- no major domain is below **70%**
+- I can explain why wrong answers are wrong
+- results are not just memorized from previous questions
+
+## Borderline
+
+If overall score is **75–79%**:
+
+- review the type of mistakes
+- if mainly details / wording → exam may still be reasonable
+- if major conceptual gaps remain → postpone
+
+## Not ready
+
+If overall score is:
+
+- **65–74%** → postpone a few days and remediate
+- **below 65%** → postpone and rebuild the plan around weak domains
+
+---
+
+# Revised Calendar Plan
+
+## Friday 20 November — Compute I: VM Core
+
+**Duration:** 2h
+
+### Topics
+
+- VM architecture
+- VM sizes
+- images
+- OS disk
+- data disks
+- temporary disk
+- managed disks
+- resizing
+- deallocation
+- Azure Compute Gallery
+
+### Study goal
+
+Be able to explain:
+
+- what resources a VM depends on
+- OS disk vs data disk vs temporary disk
+- what happens when a VM is stopped vs deallocated
+- how VM size affects compute and NIC limits
+- why managed disks exist
+
+### Lab
+
+No subscription required yet.
+
+Read simple VM creation workflows, Bicep/ARM examples and PowerShell commands.
+
+### Done when
+
+- VM fundamentals can be explained without notes
+- at least 15 Compute questions completed
+- unclear topics added to `AZ104-GAPS.md`
+
+---
+
+## Saturday 21 November — Compute II: Availability and Scale
+
+**Duration:** 2h30
+
+### Topics
+
+- Availability Sets
+- Fault Domains
+- Update Domains
+- Availability Zones
+- VM Scale Sets
+- autoscaling
+- scale up vs scale out
+
+### Key comparison
+
+Be able to choose between:
+
+- single VM
+- Availability Set
+- Availability Zone
+- VM Scale Set
+
+### Optional lab
+
+If no subscription:
+
+- study diagrams and deployment workflows only
+
+If subscription exists:
+
+- create a small VMSS
+- inspect instances
+- inspect scaling settings
+- delete resources afterward
+
+### Done when
+
+- availability choices can be selected from scenarios
+- at least 20 scenario questions completed
+- weak concepts logged
+
+---
+
+## Sunday 22 November — Compute III: App Service, Containers and IaC
+
+**Duration:** 2h30
+
+### Topics
+
+#### App Service
+
+- App Service Plan
+- scaling
+- deployment slots
+- custom domains
+- TLS
+- backups
+- networking basics
+
+#### Containers
+
+- Azure Container Registry
+- Azure Container Instances
+- Azure Container Apps
+
+#### IaC
+
+- ARM templates
+- Bicep
+- parameters
+- variables
+- resources
+- outputs
+- deployment scope
+
+### Goal
+
+Do not learn Bicep deeply.
+
+Be able to:
+
+- read a basic Bicep template
+- recognize what is being deployed
+- understand parameterization
+- choose ACI vs Container Apps vs App Service in simple scenarios
+
+### Done when
+
+- 20+ Compute questions completed
+- target **70%+ on Compute mini-test**
+
+---
+
+## Monday 23 November — Monitor, Logs and Alerts
+
+**Duration:** 2h15
+
+### Topics
+
+- Azure Monitor
+- metrics vs logs
+- Log Analytics Workspace
+- diagnostic settings
+- alerts
+- action groups
+- Insights
+- basic KQL recognition
+- Activity Log
+
+### Mental model
+
+Resource  
+→ metric / log  
+→ Azure Monitor  
+→ alert rule  
+→ action group  
+→ notification / automation
+
+### Done when
+
+- difference between metrics, logs and Activity Log is clear
+- can explain alert + action group workflow
+- can read a basic KQL query
+- 15–20 questions completed
+
+---
+
+## Tuesday 24 November — Backup, Recovery and Network Monitoring
+
+**Duration:** 2h15
+
+### Topics
+
+- Azure Backup
+- Backup Vault
+- Recovery Services Vault
+- backup policies
+- restore
+- Site Recovery
+- failover
+- Network Watcher
+- Connection Monitor
+
+### Key comparison
+
+Be able to explain:
+
+- Backup vs Site Recovery
+- Recovery Services Vault vs Backup Vault at a high level
+- backup vs business continuity / disaster recovery
+
+### Done when
+
+- restore and failover workflows are understood
+- 15–20 questions completed
+- Monitor/Backup mini-test target: **70%+**
+
+---
+
+## Wednesday 25 November — Networking I
+
+**Duration:** 2h15
+
+### Topics
+
+- VNets
+- subnets
+- IP addressing
+- NSG
+- ASG
+- effective security rules
+- UDR
+- VNet peering
+- Bastion
+- public IP
+
+### Existing knowledge
+
+Do not spend time relearning:
+
+- subnet basics
+- routing basics
+- firewall basics
+- CIDR fundamentals
+
+Focus on **Azure-specific implementation**.
+
+### Done when
+
+- can trace traffic through subnet/NIC NSGs
+- can reason about effective rules
+- can explain UDR and peering
+- 20 networking questions completed
+
+---
+
+## Thursday 26 November — Networking II + Storage Refresh
+
+**Duration:** 2h30
+
+### Networking
+
+- Private Endpoint
+- Service Endpoint
+- Private DNS
+- Azure DNS
+- internal vs public Load Balancer
+- health probes
+- backend pools
+- troubleshooting connectivity
+
+### Storage refresh
+
+Only revise:
+
+- redundancy
+- SAS
+- keys vs identity
+- Blob tiers
+- lifecycle management
+- Azure Files
+- Storage firewall
+- AzCopy / Storage Explorer
+
+### Key comparison
+
+Know clearly:
+
+- Private Endpoint vs Service Endpoint
+- LRS / ZRS / GRS / GZRS
+- SAS vs access keys vs RBAC
+
+### Done when
+
+- Networking quiz: target **75%+**
+- Storage quiz: target **80%+**
+
+---
+
+## Friday 27 November — Identity and Governance Refresh
+
+**Duration:** 2h
+
+### Focus only on Azure-specific areas
+
+- Azure RBAC
+- scopes
+- inheritance
+- custom roles
+- Management Groups
+- subscriptions
+- Resource Groups
+- Azure Policy
+- resource locks
+- tags
+- budgets
+- Advisor
+
+### Do not over-study familiar IAM topics
+
+Entra users/groups are already relatively strong.
+
+### Key comparisons
+
+- Azure RBAC vs Entra roles
+- RBAC vs Azure Policy
+- Policy vs resource locks
+- subscription vs management group vs resource group scope
+
+### Done when
+
+- 20 governance questions completed
+- target **80%+**
+
+---
+
+## Saturday 28 November — Full Practice Assessment
+
+**Duration:** 2h30–3h
+
+### Rules
+
+- fresh attempt
+- closed notes
+- no web search
+- treat it like the exam
+
+### After assessment
+
+Record:
+
+- overall score
+- domain scores
+- every wrong answer
+- every guessed answer
+- every topic that felt uncertain
+
+Update:
+
+`AZ104-GAPS.md`
+
+### Decision
+
+#### If ≥80%
+
+Book the exam for the earliest reasonable slot near the end of November / beginning of December.
+
+#### If 75–79%
+
+Do targeted remediation Sunday and decide afterward.
+
+#### If <75%
+
+Do not rush the exam.
+
+Postpone and rebuild the next study phase from the weak domains.
+
+---
+
+## Sunday 29 November — Targeted Remediation
+
+**Duration:** 2–3h
+
+Study **only** the top weaknesses from the 28 November assessment.
+
+Do not restart entire Microsoft Learn paths.
+
+For each weak topic:
+
+1. read official documentation
+2. write 3–5 concise bullets
+3. complete targeted questions
+4. explain the concept aloud / from memory
+
+### Done when
+
+- top 3 weaknesses have been reviewed
+- fresh questions on those topics reach ~80%
+
+---
+
+## Monday 30 November — Readiness Check / Optional Exam Window
+
+**Duration:** depends on outcome
+
+### If ready
+
+- light review only
+- no new major topics
+- sit AZ-104 if a suitable exam slot is available
+
+### If not ready
+
+- do not force an exam just to meet the November target
+- move the exam to early December
+- continue targeted remediation
+
+---
+
+# Azure Subscription Strategy
+
+Do not create an Azure subscription just to complete very basic introductory labs.
+
+Create/use a subscription when hands-on work becomes valuable for:
+
+- VM Scale Sets
+- disks
+- NSGs
+- VNet peering
+- Private Endpoints
+- Service Endpoints
+- Azure Monitor
+- Log Analytics
+- Azure Backup
+- App Service
+- Policy / RBAC / Locks
+
+Use a dedicated lab resource group.
+
+Example:
+
+```text
+RG-AZ104-LAB
+```
+
+After each lab:
+
+- delete unnecessary resources
+- check remaining disks
+- check public IPs
+- check vault items
+- verify nothing billable was accidentally left behind
+
+---
+
+# NotebookLM Strategy
+
+Use NotebookLM as a study assistant, not as the source of truth.
+
+Source of truth:
+
+1. official AZ-104 study guide
+2. Microsoft Learn
+3. official Microsoft documentation
+4. existing Geneva training notes and labs
+
+Use NotebookLM for:
+
+- scenario questions
+- flashcards
+- comparisons
+- active recall
+- weak-topic drills
+
+Prefer questions like:
+
+> A company has VNet A, VNet B and a storage account with requirement X. Which Azure configuration satisfies the requirement with the least administrative effort?
+
+Avoid spending too much time on definition-only questions.
+
+---
+
+# Gap Log
+
+Maintain:
+
+```text
+AZ104-GAPS.md
+```
+
+Format:
+
+```md
+## Compute
+
+✅ Managed disks
+⚠️ Availability Set vs Zone
+❌ VMSS autoscale rules
+
+## Networking
+
+✅ NSG
+⚠️ Load Balancer probes
+❌ Private Endpoint + Private DNS
+
+## Monitor
+
+❌ Diagnostic settings
+⚠️ Metrics vs Logs
+```
+
+Legend:
+
+- ✅ confident
+- ⚠️ partially understood
+- ❌ weak / wrong in practice
+
+Use the gap log to decide the next review session.
+
+---
+
+# Instructions for Gemini Calendar Scheduling
+
+Use this plan to update my calendar.
+
+## Scheduling rules
+
+1. Time zone: **Europe/Zurich**.
+2. Schedule sessions from **20 November through 30 November 2026**.
+3. Preserve the topic order unless calendar conflicts make that impossible.
+4. Prefer:
+   - train time for reading, notes, flashcards and questions
+   - desk/internet time for labs
+5. Sessions may be split into 45–75 minute blocks if necessary.
+6. Preserve the total planned study duration for each day.
+7. Do not schedule labs during train travel unless no Azure interaction is required.
+8. Add a **15-minute reminder** to study sessions.
+9. Keep **28 November** reserved for the full practice assessment.
+10. Keep **29 November** for remediation based on that result.
+11. Treat **30 November** as a readiness/exam window, not as a mandatory exam date.
+12. Do not create an exam booking automatically.
+13. If there is insufficient free time, prioritize:
+    - Compute
+    - Monitor / Backup
+    - Networking
+14. Do not silently delete missed topics. Flag them for replanning.
+15. If a session has already elapsed when this file is imported, reschedule it into the next available slot without moving the practice assessment unless necessary.
+
+---
+
+# Target Outcome
+
+By the next full practice assessment:
+
+- Compute: **≥75%**
+- Monitor / Backup: **≥70%**
+- Networking: **≥75%**
+- Identity / Governance: **≥80%**
+- Storage: **≥80%**
+- Overall: **≥80% preferred**
+
+The goal is not to finish every Microsoft Learn page.
+
+The goal is to be able to correctly reason through AZ-104 scenarios across all exam domains.
