@@ -162,3 +162,50 @@ Par exemple, pour un site web, on pourrait avoir une image avec apache, MySQL et
 Il est aussi possible de créer des images à installer selon nos besoins, et utiliser "Azure Compute Gallery" pour gérer des images custom.
 
 Azure Compute Gallery est un service qui permet de gérer, versionner et distribuer des images OS entre plusieurs régions et abonnements Azure
+
+### Création de VMs
+
+Creation de ressources via:
+- gui
+- powershell/bash/cloudshell
+- ARM Templates/Bicep/Terraform
+- rest API
+- Azure Client SDK
+
+Il est possible de configurer un accès SSH lors de la création d'une VM
+
+Quand on utilise des templates, il est possible non seulement de créer de nouvelles VMs, mais aussi de repousser le Json d'une VM existante pour en modifier la configuration
+
+création d'une VM via azure CLI:
+
+``` bash
+az vm create --resource-group TestResourceGroup --name test-wp1-eus-vm --image Ubuntu2204 --admin-username azureuser --generate-ssh-keys
+```
+
+création d'une VM via azure Powershell:
+
+```Powershell
+New-AzVm -ResourceGroupName "TestResourceGroup" -Name "test-wp1-eus-vm" -Location "East US" -Image Debian11 -VirtualNetworkName "test-wp1-eus-network" -SubnetName "default" -SecurityGroupName "test-wp1-eus-nsg" -PublicIpAddressName "test-wp1-eus-pubip" -GenerateSshKey -SshKeyName myPSKey -OpenPorts 22
+```
+
+"-OpenPorts" applique la configuration sur le NSG indiqué dans la commande.
+le NSG ne fait pas de port forwarding. On expose donc la VM directement.
+Pour faire du NAT et du Port forwarding, il faut utiliser: 
+- Azure Bastion (best practice pour la gestion des accès admin)
+- Azure Load Balancer
+- Azure Firewall
+
+Le client SDK est disponible pour C#, Java, Node.js, PHP, Python, Ruby, and go
+les languages basés sur .net
+
+les Azure VM Extentions sont des outils qui permettent de configurer et automatiser des tâches sur les VMs après le déploiement de celles-ci
+
+Azure Automation services permet d'automatiser des tâches dans Azure:
+- Script qui automatise une tâche repetitive
+- Surveiller se des MAJ d'applications qui tournent sur in VM est disponible
+- Surveiller les MAJ OS des VMs
+
+
+Auto-shutdown
+--> Plannifier des crainaux horaires lors des quel eteindre les VM dont on aurait pas besoin
+permet d'économiser sur la facture.
